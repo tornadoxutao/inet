@@ -104,6 +104,17 @@ void Ospf::createOspfRouter()
     host->subscribe(interfaceStateChangedSignal, this);
 }
 
+void Ospf::stopOspfRouter()
+{
+    host->unsubscribe(interfaceCreatedSignal, this);
+    host->unsubscribe(interfaceDeletedSignal, this);
+    host->unsubscribe(interfaceStateChangedSignal, this);
+    ASSERT(ospfRouter);
+    delete ospfRouter;
+    ospfRouter = nullptr;
+    isUp = false;
+}
+
 
 /**
  * Listen on interface changes and update private data structures.
@@ -156,18 +167,12 @@ bool Ospf::handleOperationStage(LifecycleOperation *operation, int stage, IDoneC
     }
     else if (dynamic_cast<NodeShutdownOperation *>(operation)) {
         if (static_cast<NodeShutdownOperation::Stage>(stage) == NodeShutdownOperation::STAGE_ROUTING_PROTOCOLS) {
-            ASSERT(ospfRouter);
-            isUp = false;
-            delete ospfRouter;
-            ospfRouter = nullptr;
+            stopOspfRouter();
         }
     }
     else if (dynamic_cast<NodeCrashOperation *>(operation)) {
         if (static_cast<NodeCrashOperation::Stage>(stage) == NodeCrashOperation::STAGE_CRASH) {
-            ASSERT(ospfRouter);
-            isUp = false;
-            delete ospfRouter;
-            ospfRouter = nullptr;
+            stopOspfRouter();
         }
     }
     else {
