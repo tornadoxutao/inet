@@ -39,9 +39,9 @@ void StationaryGeographicMobility::initializeOrientation()
     auto initialHeading = deg(par("initialHeading"));
     auto initialElevation = deg(par("initialElevation"));
     auto initialBank = deg(par("initialBank"));
-    Quaternion initialOrientation(EulerAngles(initialHeading, initialElevation, initialBank));
+    Quaternion initialOrientation(EulerAngles(deg(90) - initialHeading, -initialElevation, initialBank));
     // TODO: this is probably wrong, but fixing it is delayed until we have an example
-    lastOrientation = sceneOrientation * initialOrientation;
+    lastOrientation = initialOrientation / sceneOrientation;
 }
 
 } // namespace inet
