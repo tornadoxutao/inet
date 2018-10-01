@@ -122,14 +122,14 @@ void MobilityBase::initialize(int stage)
     else if (stage == INITSTAGE_PHYSICAL_ENVIRONMENT_2) {
         initializeOrientation();
         initializePosition();
+        checkPosition();
+        emitMobilityStateChangedSignal();
     }
 }
 
 void MobilityBase::initializePosition()
 {
     setInitialPosition();
-    checkPosition();
-    emitMobilityStateChangedSignal();
 }
 
 void MobilityBase::setInitialPosition()
