@@ -23,6 +23,7 @@ import inet.common.queue.IOutputQueue;
 import inet.linklayer.contract.IEtherMac;
 import inet.linklayer.contract.IEthernetInterface;
 import inet.linklayer.contract.ITrafficConditioner;
+import inet.linklayer.ieee8021q.IEtherVlan;
 
 //
 // Ethernet network interface. Complements ~EtherMac and ~EtherEncap
@@ -34,7 +35,7 @@ module EthernetInterface like IEthernetInterface
         @class(InterfaceEntry);
         string interfaceTableModule;
         bool csmacdSupport = default(false);  // by default CSMA/CD is turned off, so only point-to-point duplex links are supported.
-        string fcsMode @enum("declared", "computed") = default("declared");
+        string fcsMode @enum("declared","computed") = default("declared");
         int numOutputHooks = default(0);
         int numInputHooks = default(0);
         @display("i=block/ifcard;bgl=2");
