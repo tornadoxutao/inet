@@ -71,9 +71,9 @@ class Ospf : public RoutingProtocolBase, protected cListener
     virtual void createOspfRouter();
 
     // lifecycle
-    virtual bool handleNodeStart(IDoneCallback *) override;
-    virtual bool handleNodeShutdown(IDoneCallback *) override;
-    virtual void handleNodeCrash() override;
+    virtual bool handleStartOperation(IDoneCallback *) override;
+    virtual bool handleStopOperation(IDoneCallback *) override;
+    virtual void handleCrashOperation() override;
 };
 
 } // namespace ospf
