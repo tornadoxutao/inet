@@ -99,7 +99,7 @@ void PimBase::initialize(int stage)
     }
 }
 
-bool PimBase::handleStartOperation(IDoneCallback *doneCallback)
+bool PimBase::handleStartOperation(LifecycleOperation *operation, IDoneCallback *doneCallback)
 {
     generationID = intrand(UINT32_MAX);
     // to receive PIM messages, join to ALL_PIM_ROUTERS multicast group
@@ -121,7 +121,7 @@ bool PimBase::handleStartOperation(IDoneCallback *doneCallback)
     return true;
 }
 
-bool PimBase::handleStopOperation(IDoneCallback *doneCallback)
+bool PimBase::handleStopOperation(LifecycleOperation *operation, IDoneCallback *doneCallback)
 {
     // TODO unregister IP_PROT_PIM
     cancelAndDelete(helloTimer);
@@ -129,7 +129,7 @@ bool PimBase::handleStopOperation(IDoneCallback *doneCallback)
     return true;
 }
 
-void PimBase::handleCrashOperation()
+void PimBase::handleCrashOperation(LifecycleOperation *operation)
 {
     // TODO unregister IP_PROT_PIM
     cancelAndDelete(helloTimer);
