@@ -22,6 +22,15 @@
 
 namespace inet {
 
+/* //TODO
+ * kell: egy socketOff signal, hogy mindenki kiszedhesse a node-on belül a socketet a tábláiból, a dispatcherek is.
+ * pl.:
+ *  handleCrashOperation: app->emit(socketOff, socketId);
+ *  ipv4: processing socket close: ipv4->emit(socketOff, socketId);
+ *  ipv4: ha kap a node egy socketOff signal-t, akkor ki kell szednie a socket map-ből.
+ */
+
+
 /**
  * This class provides an interface that should be implemented by all sockets.
  */
