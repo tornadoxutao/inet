@@ -1268,6 +1268,9 @@ void Ipv4::stop()
 {
     isUp = false;
     flush();
+    for (auto it : socketIdToSocketDescriptor)
+        delete it.second;
+    socketIdToSocketDescriptor.clear();
 }
 
 void Ipv4::flush()
